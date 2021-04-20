@@ -25,11 +25,12 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="css" scoped>
 .media {
   cursor: pointer;
-  &:hover {
-    outline: 1px solid grey;
   }
-}
+
+  .media:hover {
+    outline: 1px solid grey;}
+
 </style>
