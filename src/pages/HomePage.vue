@@ -25,6 +25,7 @@ import { reactive } from 'vue'
 import { moviesService } from '../services/MoviesService'
 import Results from '../components/ResultsComponent'
 import Details from '../components/DetailsComponent'
+import Notification from '../utils/Notification'
 
 export default {
   name: 'HomePage',
@@ -36,10 +37,13 @@ export default {
       state,
       async search() {
         try {
-          await moviesService.getMovies(state.query)
+          if (await Notification.confirmAction(`Are you Sure you wantt to search ${state.query}?`, "i'm not sure you want to do that", 'danger', 'yes I know')) {
+            await moviesService.getMovies(state.query)
+          }
           state.query = ''
         } catch (e) {
           console.error(e)
+          Notification.toast('Error')
         }
       }
     }
